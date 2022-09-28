@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/table.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+
+<body>
+    <div class="container su">
+        <h2 align="left" style = "color: white" >Search user:</h2>
+        <form th:action="@{/employee/manageUsers/search}" method="get">
+            <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by user e-mail" size="50" >
+            <button type="submit" class="btn btn-primary" >Search</button>
+            <button type="submit" class="btn btn-info" >Reset</button>
+        </form>
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead class="tbl-header">
+                <tr>
+                    <th>User e-mail:</th>
+                    <th>User name:</th>
+                    <th>User role:
+                    <th>Action:</th>
+            </thead>
+            <th:block th:each="user : ${users}" >
+                <tbody class="tbl-content">
+                    <td th:text="${user.email}">User email</td>
+                    <td th:text="${user.name}">User name</td>
+                    <td th:text="${user.role.role_name}">User name</td>
+                    <td> 
+                        <div sec:authorize="hasAnyAuthority('Admin')">
+                            <a th:href="@{/admin/updateRole/{ID}(ID = ${user.user_id})}" class="btn btn-primary">Change role</a>
+                        </div>
+                        <a th:href="@{/employee/checkTickets/{ID}(ID = ${user.user_id})}" class="btn btn-info">Check tickets</a>
+                    </td>
+                </tbody>
+            </th:block>        
+        </table>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

@@ -1,0 +1,37 @@
+h1{
+  font-size: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 15px;
+  margin-left: 208px;
+}
+
+p1{
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+body{
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-family: 'Roboto', sans-serif;
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  width:100%;
+  background-color: #343a40;
+  color: white;
+  bottom:0;
+  left: 0;
+  position: absolute;
+}
+
+

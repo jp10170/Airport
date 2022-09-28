@@ -1,0 +1,22 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Airport Milano</title>
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+
+<div>
+      <h1> Welcome to Milano Airport!  </h1>
+</div>
+
+</body>
+
+<footer>
+  <p>If you don't have an account please register:<br>
+  <a href="http://localhost:8080/register">Registration!</a></p>
+</footer>

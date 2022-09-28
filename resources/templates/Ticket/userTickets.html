@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/table.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+
+<body>
+        <div class="container su">
+            <h2 align="left" style = "color: white" th:text ="${user.email} + ' tickets: '" ></h2>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                  <tr>
+                      <th>Route</th>
+                      <th>Plane name</th>
+                      <th>Depart time</th>
+                      <th>Landing time</th>
+                      <th>Seat number</th>
+                      <th>Seat class</th>
+                      <th>Ticket price</th>
+                  </tr>
+                </thead>
+                <th:block th:each="ticket : ${user.tickets}">
+                <tbody>
+
+                    <td th:text="${ticket.flight.route.routeName}">Route</td>
+
+                    <td th:text="${ticket.flight.plane.planeName}">Plane name</td>
+
+                    <td th:text="${ticket.flight.departTime}">Depart time</td>
+
+                    <td th:text="${ticket.flight.landingTime}">Landing time</td>
+
+                    <td th:text="${ticket.seatno}">Seat number</td>
+                    
+                    <td th:text="${ticket.seatclass}">Seat class</td>
+                    
+                    <td th:text="${ticket.ticketPrice}">Ticket price</td>
+                
+                </tbody>
+                </th:block>
+            </table>
+            <a th:href="@{/employee/manageUsers}" class="btn btn-info">Cancel</a>
+        </div>
+</body>
+
+<footer>
+  <p>For any questions please contact us!<br>
+  <a href="mailto:Airport@gmail.com">Airport@gmail.com</a></p>
+</footer>
+
+</html>

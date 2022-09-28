@@ -1,0 +1,28 @@
+h1{
+    font-family: sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    color: whitesmoke;
+    text-align: center;
+}
+
+
+body {
+    background-image :  url(/background.jpg);
+    height: 0%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 125%;
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  width:100%;
+  background-color: #343a40;
+  color: white;
+  bottom:0;
+  left: 0;
+  position: absolute;
+}
+

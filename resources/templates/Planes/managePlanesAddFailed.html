@@ -1,0 +1,77 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/fllights.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    <h1>Planes:</h1>
+        <div class="container" style="display: flex;">
+            <table cellpadding="0" cellspacing="0" border="0" >
+                    <thead class="tbl-header">
+                      <tr>
+                        <th>Plane name:</th>
+                        <th>Total seats:</th>
+                        <th>Economy price:</th>
+                        <th>Business price:</th>
+                    </thead>
+
+                    <th:block th:each="plane : ${planes}" >
+                        <tbody class="tbl-content">
+                            <td th:text="${plane.planeName}">Plane name</td>
+                            <td th:text="${plane.totalSeats}">Total seats</td>
+                            <td th:text="${plane.economyPrice}">Economy price</td>
+                            <td th:text="${plane.businessPrice}">Business price</td>
+                        </tbody>
+                    </th:block>        
+            </table>
+            
+            <div class="container text-center" style="flex-grow: 4;" width = "1000px">
+                
+                <form th:action="@{/employee/processAddPlane}" th:object ="${newPlane}"
+                    method="post" style="max-width: 600px; margin: 0 auto;">
+                    <p style="color: red">ERROR-PLANE NAME INVALID!!</p>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Plane name: </label>
+                            <input type="text" th:field="*{planeName}" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Business seats: </label>
+                        <input type="number" min="0" max="100" th:field="*{totalSeatsBusiness}" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Economy seats: </label>
+                        <input type="number" min="0" max="100" th:field="*{totalSeatsEconomy}" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Business price: </label>
+                        <input type="number" min="0" th:field="*{businessPrice}" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Economy price: </label>
+                        <input type="number" min="0" th:field="*{economyPrice}" class="form-control" required />
+                    </div>
+                    
+                    
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add plane!</button> 
+                    </div>
+                   
+                </form>
+            </div>
+                
+                
+            </div>  
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

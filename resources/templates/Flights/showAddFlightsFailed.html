@@ -1,0 +1,84 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/fllights.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    <h1>Flights:</h1>
+        <div class="container" style="display: flex;">
+            <table cellpadding="0" cellspacing="0" border="0" >
+                    <thead class="tbl-header">
+                      <tr>
+                        <th>Route name:</th>
+                        <th>Plane name:</th>
+                        <th>Depart time:</th>
+                        <th>Arrival time:</th>
+                        <th>Action</th>
+                    </thead>
+
+                    <th:block th:each="flight : ${flights}" >
+                        <tbody class="tbl-content">
+                            <td th:text="${flight.route.routeName}">Route name</td>
+                            <td th:text="${flight.plane.planeName}">Plane name</td>
+                            <td th:text="${flight.departTime}">Depart time</td>
+                            <td th:text="${flight.landingTime}">Landing time</td>
+                            <td><a th:href="@{http://localhost:8080/employee/updateFlight/{ID}(ID = ${flight.flight_id})}" class="btn btn-primary">Update date/time</a>
+                                <a th:href="@{http://localhost:8080/employee/deleteFlight/{ID}(ID = ${flight.flight_id})}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tbody>
+                    </th:block>        
+            </table>
+            
+            <div class="container text-center" style="flex-grow: 4;" width = "1000px">
+                
+                <form th:action="@{/employee/processAddFlight}" 
+                    method="post" style="max-width: 600px; margin: 0 auto;">
+                    <p style ="color: red;">Invalid date/time!!</p>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Route: </label>
+                        <select th:field="*{newFlight.route}" class="form-control" required>
+                            <th:block th:each="route : ${routes}" >
+                                <option th:text = "${route.routeName}" th:value ="${route.route_id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Plane: </label>
+                        <select th:field="*{newFlight.plane}" class="form-control" required>
+                            <th:block th:each="plane : ${planes}" >
+                                <option th:text = "${plane.planeName}" th:value ="${plane.plane_id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Depart date/time: </label>
+                        <div class="col-8">
+                            <input type="datetime-local" th:field="*{time.departDateTime}"  required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Arrival date/time: </label>
+                        <div class="col-8">
+                            <input type="datetime-local" th:field="*{time.landingDateTime}"  required>
+                        </div>
+                    </div>        
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add flight!</button> 
+                    </div>
+                </div>
+                </form>
+                
+            </div>  
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

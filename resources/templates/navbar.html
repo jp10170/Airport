@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NavigationBar</title>
+
+</head>
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}">Airport</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <div sec:authorize="isAnonymous()">
+            <li><a class="nav-link" th:href="@{http://localhost:8080/login}" >Login</a></li>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <li><a class="nav-link" th:href="@{http://localhost:8080/logout}">Logout</a></li>
+            </div>
+            <li><a class="nav-link" th:href="@{http://localhost:8080/index}">Home</a></li>
+            <div sec:authorize="hasAnyAuthority('User','Admin','Employee')">
+            <li><a class="nav-link" th:href="@{http://localhost:8080/flights}">Flights</a></li>   
+            </div>
+            <div sec:authorize="isAnonymous()">
+            <li><a class="nav-link" th:href="@{http://localhost:8080/flights}">Flights</a></li>
+            </div>
+            <div sec:authorize="hasAnyAuthority('User','Admin','Employee')">
+            <li><a class="nav-link" th:href="@{http://localhost:8080/user/myTickets}">My Tickets</a></li>   
+            </div>
+            <div sec:authorize="hasAnyAuthority('Admin','Employee')">
+                <li><a class="nav-link" th:href="@{http://localhost:8080/employee/manageFlights}">Manage flights</a></li>
+            </div>
+            <div sec:authorize="hasAnyAuthority('Admin','Employee')">
+                <li><a class="nav-link" th:href="@{http://localhost:8080/employee/manageRoutes}">Manage routes</a></li>
+            </div>
+            <div sec:authorize="hasAnyAuthority('Admin','Employee')">
+                <li><a class="nav-link" th:href="@{http://localhost:8080/employee/managePlanes}">Manage planes</a></li>
+            </div>
+            <div sec:authorize="hasAnyAuthority('Admin','Employee')">
+                <li><a class="nav-link" th:href="@{http://localhost:8080/employee/manageUsers}">Manage users</a></li>
+            </div>
+            
+        </ul>
+    </div>    
+</nav>
+
+</body>
+</html>

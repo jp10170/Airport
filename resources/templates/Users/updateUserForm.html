@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/forms.css}" rel="stylesheet type="text/css"" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+    </head>
+    <body>
+        <div class="container text-center">
+            <p style="margin-left: 0px; text-align: left; size: 20px; color: white" th:text = "'Change role for ' + ${oldUser.email}"></p>
+            <form th:action="@{/admin/processUpdateRole/{ID}(ID = ${oldUser.user_id})}"
+                method="put" style="max-width: 600px; margin-top: 50px;">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">New role: </label>
+                            <select th:field="*{oldUser.role}" class="form-control" required>
+                            <th:block th:each="role : ${roles}" >
+                                <option th:text = "${role.role_name}" th:value ="${role.role_id}"/>
+                            </th:block>
+                            </select>                           
+                        </div> 
+                        <div>
+                            <a th:href="@{/admin/manageUsers}" class="btn btn-info">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Change role!</button> 
+                        </div>
+            </form> 
+        </div>
+    </body>
+<footer>
+  <p>For any questions please contact us!<br>
+  <a href="mailto:Airport@gmail.com">Airport@gmail.com</a></p>
+</footer>
+</html>
+

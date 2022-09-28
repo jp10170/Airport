@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/forms.css}" rel="stylesheet type="text/css"" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+    </head>
+    <body>
+        <div class="container text-center">
+            <p style="margin-left: 0px; text-align: left; size: 20px; color: white">Select accommodation type :  </p>
+            <form th:action="@{/user/processBookTicket/{ID}(ID = ${flight.flight_id})}"
+                method="post" style="max-width: 600px; margin-top: 50px;">
+                        <span th:if="${flight.availableEconomy > 0 }">
+                            <p th:text = "'Economy price: ' + ${helper.economyPrice}"></p>
+                        </span>
+                        <span th:if="${flight.availableBusiness > 0 }">
+                            <p th:text = "'Business price: ' + ${helper.businessPrice}"></p>
+                        </span>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Seat class: </label>
+                            <select th:field="*{ticket.seatclass}" class="form-control" required>
+                                    <option th:if="${flight.availableEconomy > 0 }" th:text = "Economy" th:value ="Economy"/>
+                                    <option th:if="${flight.availableBusiness > 0 }" th:text = "Business" th:value ="Business"/>
+                            </select>                           
+                        </div> 
+                        <div>
+                            <a th:href="@{/flights}" class="btn btn-info">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Book ticket!</button> 
+                        </div>
+            </form> 
+        </div>
+    </body>
+<footer>
+  <p>For any questions please contact us!<br>
+  <a href="mailto:Airport@gmail.com">Airport@gmail.com</a></p>
+</footer>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/table.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    <h1>Available flights</h1>
+        <div class="container su">
+            <h2 align="left" style = "color: white" >Search flight:</h2>
+            <form th:action="@{/flights/search}" method="get">
+                <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find flight by route name" size="50" >
+                <button type="submit" class="btn btn-primary" >Search</button>
+                <button type="submit" class="btn btn-info" >Reset</button>
+            </form>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                  <tr>
+                      <th>Route</th>
+                      <th>Plane name</th>
+                      <th>Depart time</th>
+                      <th>Landing time</th>
+                      <th>Tickets available</th>
+                      <th sec:authorize="hasAnyAuthority('Admin','Employee','User')">Action</th>
+                  </tr>
+                </thead>
+                <th:block th:each="flight : ${flights}">
+                <tbody>
+
+                    <td th:text="${flight.route.routeName}">Route</td>
+
+                    <td th:text="${flight.plane.planeName}">Plane name</td>
+
+                    <td th:text="${flight.departTime}">Depart time</td>
+
+                    <td th:text="${flight.landingTime}">Landing time</td>
+
+                    <td th:text="${flight.availableSeats}">Available seats</td>
+                    <td sec:authorize="hasAnyAuthority('Admin','Employee','User')" th:if="${flight.availableSeats > 0 }">
+                        <a th:href="@{/user/bookTicket/{ID}(ID = ${flight.flight_id})}" class="btn btn-info">Book ticket</a>
+                    </td>
+                    <td sec:authorize="hasAnyAuthority('Admin','Employee','User')" th:if="${flight.availableSeats == 0 }" th:text="No seats available!"></td>
+                </tbody>
+                </th:block>
+            </table>
+        </div>
+</body>
+
+<footer>
+  <p>For any questions please contact us!<br>
+  <a href="mailto:Airport@gmail.com">Airport@gmail.com</a></p>
+</footer>
+
+</html>

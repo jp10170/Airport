@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/forms.css}" rel="stylesheet type="text/css"" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+    </head>
+    <body>
+        <form th:action="@{/employee/processUpdateRoutePrice/{ID}(ID = ${oldRoute.route_id})}" 
+                    method="put" style="max-width: 600px; margin: 0 auto;">
+            <p1>Enter new route price :</p1>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Route price:</label>
+                        <div class="col-8">
+                            <input type="number" min="0" th:field="*{updatedRoute.routePrice}" th:placeholder="${oldRoute.routePrice}" required>
+                        </div>
+                    </div>
+                    <div>
+                        <a th:href="@{/employee/manageFlights}" class="btn btn-info">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update route price</button> 
+                    </div>
+                </div>
+                </form>
+                
+            </div>  
+    </body>
+<footer>
+  <p>For any questions please contact us!<br>
+  <a href="mailto:Airport@gmail.com">Airport@gmail.com</a></p>
+</footer>
+</html>
